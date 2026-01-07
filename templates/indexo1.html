@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        #summary {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PDF Summarizer</h1>
+        <form id="uploadForm">
+            <input type="file" id="pdfFile" accept="application/pdf" required>
+            <button onclick="uploadPDF()" type="submit">Generate Summary</button>
+        </form>
+        <!-- <div class="loading" id="loadingText">Processing...</div> -->
+        <h2>Extracted Text:</h2>
+        <pre id="output"></pre>
+    </div>
+
+    <!-- <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('pdfFile');
+            const loadingText = document.getElementById('loadingText');
+            const summaryDiv = document.getElementById('summary');
+            
+            if (!fileInput.files[0]) {
+                alert('Please select a PDF file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('pdf', fileInput.files[0]);
+
+            try {
+                loadingText.style.display = 'block';
+                summaryDiv.innerHTML = '';
+
+                // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
+                const response = await fetch('http://127.0.0.1:5000/upload_pdf', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                // Assuming the API returns a summary in the response
+                summaryDiv.innerHTML = `<h2>Summary:</h2><p>${data.summary}</p>`;
+            } catch (error) {
+                summaryDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            } finally {
+                loadingText.style.display = 'none';
+            }
+        });
+    </script> -->
+
+
+<!-- 
+<script>
+    async function uploadPDF() {
+      const fileInput = document.getElementById("pdfFile");
+      if (fileInput.files.length === 0) {
+        alert("Please select a PDF file first!");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+
+      try {
+        const response = await fetch("http://127.0.0.1:5000/upload_pdf", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error("Error: " + response.status);
+        }
+
+        const data = await response.json();
+        document.getElementById("output").textContent = data.text;
+      } catch (error) {
+        console.error("Error uploading PDF:", error);
+        document.getElementById("output").textContent = "Failed to extract text.";
+      }
+    }
+  </script> -->
+
+<script>
+    async function uploadPDF() {
+        const fileInput = document.getElementById("pdfFile");
+        const outputDiv = document.getElementById("output");
+        
+        if (fileInput.files.length === 0) {
+            alert("Please select a PDF file first!");
+            return;
+        }
+
+        outputDiv.textContent = "Processing...";
+        
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        try {
+            const response = await fetch("http://127.0.0.1:5000/upload_pdf", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to process PDF");
+            }
+
+            outputDiv.textContent = data.text || "No text extracted";
+            
+        } catch (error) {
+            console.error("Error uploading PDF:", error);
+            outputDiv.textContent = `Error: ${error.message}`;
+        }
+    }
+</script>
+
+
+
+
+
+
+</body>
+</html>
