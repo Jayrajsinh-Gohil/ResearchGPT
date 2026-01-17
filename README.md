@@ -42,7 +42,7 @@ An intelligent web application that leverages AI to automatically analyze and ex
 
 #### 1. Clone or Download the Project
 ```bash
-cd "PDF Summarizer working SC"
+cd "𝗥𝗲𝘀𝗲𝗮𝗿𝗰𝗵𝗚𝗣𝗧"
 ```
 
 #### 2. Create Virtual Environment
@@ -81,7 +81,7 @@ pip install huggingface-hub==0.35.0 tokenizers==0.22.1 ollama==0.6.0
 conda env create -f environment.yml
 
 # Activate environment
-conda activate pdf-summarizer
+conda activate 𝗥𝗲𝘀𝗲𝗮𝗿𝗰𝗵𝗚𝗣𝗧
 ```
 
 ### Ollama Setup (Required)
@@ -139,7 +139,7 @@ The application will start on `http://localhost:5000`
 ## 📁 Project Structure
 
 ```
-PDF Summarizer working SC/
+𝗥𝗲𝘀𝗲𝗮𝗿𝗰𝗵𝗚𝗣𝗧/
 ├── app.py                    # Main Flask application
 ├── templates/
 │   ├── index.html           # Main web interface
@@ -149,9 +149,6 @@ PDF Summarizer working SC/
 ├── environment.yml          # Conda environment configuration
 ├── runtime.txt              # Python version specification
 ├── README.md                # This file
-├── SETUP_GUIDE.md          # Detailed setup instructions
-├── LOCAL_NETWORK_SETUP.md  # Network configuration guide
-└── test_1.txt              # Test file
 ```
 
 ## 🔧 Configuration
