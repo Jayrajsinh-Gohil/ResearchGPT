@@ -319,5 +319,3 @@ This project is available for educational and research purposes.
 - [ ] Improved error handling and validation
 
 ---
-
-**Built with ❤️ using AI and Open Source Technologies**
